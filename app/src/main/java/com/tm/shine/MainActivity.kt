@@ -24,28 +24,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-//     fun ctof(num) {
-//         f = num*9/5+32
-//         return f
-//     }
-
-
     fun getWeatherDetails(view: View) {
         var tempUrl = "http://api.weatherstack.com/current?access_key=2093b02f759229c1da497533ba4e672a&query=cincinnati"
         val etCity = findViewById<EditText>(R.id.etCity)
         val etCountry = findViewById<EditText>(R.id.etCountry)
-        val city = etCity.text.toString().trim()
+        val etCityString = etCity.text.toString().trim()
         val country = etCountry.text.toString().trim()
         val tvResult = findViewById<TextView>(R.id.tvResult)
         val queue = Volley.newRequestQueue(this)
 
-        if (city == "") {
+        if (etCityString == "") {
             tvResult.text = "City cannot be empty"
         } else {
             tempUrl = if (country != "") {
-                "$url?access_key=$appid&query=$city"
+                "$url?access_key=$appid&query=$etCityString"
             } else {
-                "$url?access_key=$appid&query=$city"
+                "$url?access_key=$appid&query=$etCityString"
             }
 
             val stringRequest = StringRequest(Request.Method.POST, tempUrl,
@@ -56,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     try {
                         val jsonResponse = JSONObject(response)
                         val jsonObjectLocation = jsonResponse.getJSONObject("location")
-                        val city = jsonObjectLocation.getInt("city").toString()
+                        val city = jsonObjectLocation.getString("name")
                         val jsonObjectCurrent = jsonResponse.getJSONObject("current")
                         val temp = jsonObjectCurrent.getInt("temperature").toString()
                         val feelslike = jsonObjectCurrent.getInt("feelslike").toString()
