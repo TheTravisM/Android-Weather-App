@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Shine</string>
+    <string name="btn_Get_Weather_Text">Show Me The Weather</string>
+    <string name="editText_Country_Text">Enter Country Code Here</string>
+    <string name="EditText_City_Hint_Text">Enter City Name Here</string>
+    <string name="TextView_Heading_Text">Weather Search</string>
 </resources>
